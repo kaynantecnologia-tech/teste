@@ -1,0 +1,43 @@
+/// <reference path="../masterPage/masterPage.d.ts" />
+type PageElementsMap = MasterPageElementsMap & {
+	"#page1": $w.Page;
+	"#section6": $w.HiddenCollapsedElement;
+	"#box18": $w.Box;
+	"#box17": $w.Box;
+	"#text17": $w.Text;
+	"#text16": $w.Text;
+	"#text15": $w.Text;
+	"#box15": $w.Box;
+	"#imageX1": $w.Image;
+	"#form2": $w.WixFormsV2;
+	"#section4": $w.HiddenCollapsedElement;
+	"#box16": $w.Box;
+	"#box3": $w.Box;
+	"#box1": $w.Box;
+	"#form1": $w.WixFormsV2;
+	"#text4": $w.Text;
+	"#text3": $w.Text;
+	"#box2": $w.Box;
+	"#section5": $w.HiddenCollapsedElement;
+	"#box14": $w.Box;
+	"#box13": $w.Box;
+	"#box12": $w.Box;
+	"#text14": $w.Text;
+	"#text13": $w.Text;
+	"#box11": $w.Box;
+	"#box5": $w.Box;
+	"#box7": $w.Box;
+	"#box9": $w.Box;
+	"#text12": $w.Text;
+	"#text11": $w.Text;
+	"#box10": $w.Box;
+	"#box8": $w.Box;
+	"#text10": $w.Text;
+	"#text9": $w.Text;
+	"#box6": $w.Box;
+	"#text8": $w.Text;
+	"#text7": $w.Text;
+	"#box4": $w.Box;
+	"#text6": $w.Text;
+	"#text5": $w.Text;
+}

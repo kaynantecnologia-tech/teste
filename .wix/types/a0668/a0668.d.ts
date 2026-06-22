@@ -1,0 +1,41 @@
+/// <reference path="../masterPage/masterPage.d.ts" />
+type PageElementsMap = MasterPageElementsMap & {
+	"#page1": $w.Page;
+	"#box13": $w.Box;
+	"#text18": $w.Text;
+	"#text17": $w.Text;
+	"#section6": $w.HiddenCollapsedElement;
+	"#box14": $w.Box;
+	"#box12": $w.Box;
+	"#box10": $w.Box;
+	"#text10": $w.Text;
+	"#imageX2": $w.Image;
+	"#text12": $w.Text;
+	"#text11": $w.Text;
+	"#text16": $w.Text;
+	"#text13": $w.Text;
+	"#text15": $w.Text;
+	"#text14": $w.Text;
+	"#box11": $w.Box;
+	"#section4": $w.HiddenCollapsedElement;
+	"#box3": $w.Box;
+	"#box1": $w.Box;
+	"#imageX1": $w.Image;
+	"#text4": $w.Text;
+	"#text3": $w.Text;
+	"#text5": $w.Text;
+	"#box2": $w.Box;
+	"#repeater1": $w.Repeater;
+	"#box5": $w.Box;
+	"#box4": $w.Box;
+	"#text7": $w.Text;
+	"#text6": $w.Text;
+	"#vectorImage1": $w.VectorImage;
+	"#box7": $w.Box;
+	"#text9": $w.Text;
+	"#text8": $w.Text;
+	"#section5": $w.HiddenCollapsedElement;
+	"#box9": $w.Box;
+	"#box8": $w.Box;
+	"#box6": $w.Box;
+}
