@@ -1,0 +1,25 @@
+VIBE A SÓS — PACOTE DE COMPONENTE PARA NUVEMSHOP
+===============================================
+
+Objetivo: disponibilizar a assinatura C, escolhendo uma das três proporções da flor, com efeitos CSS leves em um tema que permita edição de código.
+
+1. Faça BACKUP do tema atual antes de qualquer alteração. NÃO substitua arquivos existentes ou cole HTML no campo de CSS.
+2. Verifique no painel se o plano permite acesso ao código-fonte. A edição deve ocorrer na CLI oficial, no modo FTP (tema legado) ou Fork (tema com seções), conforme o tema instalado.
+3. Copie os arquivos do diretório static/css/, static/js/, static/images/ e o snipplet para as pastas equivalentes do seu tema.
+4. No template principal ou cabeçalho do TEMA que você possui, inclua, adaptando caminhos se necessário:
+   {{ 'css/vibe-assinatura.css' | static_url | css_tag }}
+   {{ 'js/vibe-assinatura.js' | static_url | script_tag }}
+   {% include 'snipplets/vibe-assinatura.tpl' %}
+5. Edite no começo do snipplet: vibe_modelo='c1' ou 'c2' ou 'c3', vibe_fundo, vibe_letras e vibe_flor com a opção escolhida.
+6. Confira na PRÉVIA do tema os pontos de inclusão, contraste, tamanho do cabeçalho, acessibilidade e performance antes de publicar.
+
+NOTAS
+- A prévia da Vercel é um SITE DE TESTE separado, não uma loja real nem um tema instalável.
+- O snipplet exibe somente a MARCA. Busca, categorias, carrinho, checkout e pagamentos permanecem nativos do tema existente.
+- As imagens são rasterizadas a partir do painel de arte aprovado. Para uma versão final de impressão/placa, obtenha vetorização da arte original.
+- O tema e as permissões específicas da loja ainda não foram verificados; compatibilidade final depende da integração no tema real.
+- Sem bibliotecas externas, rastreamento ou backend.
+
+Documentação oficial:
+https://atendimento.nuvemshop.com.br/pt_BR/personalizacao-avancada-do-layout/como-editar-o-codigo-do-layout-da-minha-loja
+https://docs.nuvemshop.com.br/help/mtodos
