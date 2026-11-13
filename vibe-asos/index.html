@@ -115,9 +115,61 @@ button:focus-visible{outline:3px solid #d9af75;outline-offset:3px}
 }
 @media(prefers-reduced-motion:reduce){.autumn-leaf{display:none!important}}
 
+
+/* Comparação simples para cliente: modelo, cor e efeito independentes. */
+.option-grid{max-width:1440px;margin:16px auto 0;padding:0 22px;display:grid;grid-template-columns:1fr 1.5fr 1.35fr;gap:12px}
+.option-box{background:#fff;border:1px solid #dce5df;border-radius:16px;padding:12px 14px;min-width:0;box-shadow:0 7px 24px rgba(24,54,48,.035)}
+.option-heading{font:700 10px/1.1 Arial,sans-serif;color:#687f77;letter-spacing:.18em;display:block;margin:0 0 10px}
+.choice-row{display:flex;gap:7px;flex-wrap:wrap}
+.choice-button{border:1px solid #d2ddd6;border-radius:10px;background:#fdfefd;color:#2c504b;min-height:38px;padding:8px 10px;font-size:12px;font-weight:700;cursor:pointer;transition:background .2s,border-color .2s}
+.choice-button:hover{border-color:#93b0a5;background:#f6faf7}
+.choice-button.selected{border-color:#19494c;background:#19494c;color:#fff}
+.option-grid + .controlbar{min-height:62px;padding-top:8px;padding-bottom:9px}
+.logo .luminous,.logo .flower-luminous{will-change:background-position,opacity}
+.site.fx-e1 .autumn-leaves{display:none}
+.site.fx-e1 .header .letters{animation:reveal 1.4s ease both}
+.site.fx-e1 .header .flower{animation:flowerFade 1.35s ease-out .25s both}
+.site.fx-e1 .header .luminous{animation:sweep 5s ease-in-out 1.35s infinite}
+.site.fx-e1 .header .flower-luminous{animation:sweep 4.6s ease-in-out 1.7s infinite}
+/* E02: pétalas voam primeiro e a flor ilumina progressivamente. */
+.site.fx-e2 .header .letters{animation:reveal 1.8s cubic-bezier(.23,.75,.32,1) both}
+.site.fx-e2 .header .flower{animation:flowerReveal 2.15s cubic-bezier(.19,.74,.28,1) .15s both}
+.site.fx-e2 .header .flower-luminous{animation:flowerBright 5.4s ease-in-out 1.25s infinite}
+.site.fx-e2 .header .luminous{animation:sweep 5.4s ease-in-out 1.7s infinite}
+.site.fx-e2 .autumn-leaf{animation-name:autumn-fall}
+/* E03: brilho desliza na escrita e corre pelo sublinhado. */
+.site.fx-e3 .autumn-leaves{display:none}
+.site.fx-e3 .header .letters{animation:reveal 1.35s ease-out both}
+.site.fx-e3 .header .flower{animation:flowerFade 1.15s ease-out .2s both}
+.site.fx-e3 .header .luminous{animation:lineRush 5.3s cubic-bezier(.32,.35,.65,.9) 1s infinite}
+.site.fx-e3 .header .flower-luminous{animation:lineRush 5.3s cubic-bezier(.32,.35,.65,.9) 1.35s infinite}
+.site.fx-e3 .hero-underline{height:2px;width:200px;background:linear-gradient(90deg,transparent,var(--flower),#fff6d6,var(--flower),transparent);background-size:240% 100%;animation:underlineRush 3.6s ease-in-out infinite}
+/* E04: cobre/dourado respirando, pétalas lentas e reflexo duplo. */
+.site.fx-e4 .header .letters{animation:reveal 1.7s ease-out both}
+.site.fx-e4 .header .flower{animation:flowerFade 1.4s ease-out .25s both,flowerGlow 5.8s ease-in-out 1.5s infinite}
+.site.fx-e4 .header .luminous{animation:twoShines 6.4s ease-in-out 1.2s infinite}
+.site.fx-e4 .header .flower-luminous{animation:twoShines 6.4s ease-in-out 1.6s infinite}
+.site.fx-e4 .autumn-leaf{animation-duration:calc(var(--dur) * 1.25)}
+@keyframes flowerFade{0%{opacity:0;filter:drop-shadow(0 0 1px transparent)}100%{opacity:1;filter:drop-shadow(0 0 6px #d6a76d55)}}
+@keyframes flowerReveal{0%{opacity:0;clip-path:circle(1% at 50% 44%)}47%{opacity:.7;clip-path:circle(20% at 50% 44%)}100%{opacity:1;clip-path:circle(100% at 50% 44%)}}
+@keyframes flowerBright{0%,20%,100%{opacity:0;background-position:120% 0}38%{opacity:.96}58%{opacity:.9;background-position:-125% 0}77%{opacity:0;background-position:-125% 0}}
+@keyframes lineRush{0%,15%{opacity:0;background-position:125% 0}30%{opacity:1}65%{opacity:.93;background-position:-120% 0}75%,100%{opacity:0;background-position:-120% 0}}
+@keyframes underlineRush{0%,100%{background-position:125% 0;opacity:.2}55%{background-position:-125% 0;opacity:1}}
+@keyframes flowerGlow{0%,100%{filter:drop-shadow(0 0 2px #d6a76d44)}50%{filter:drop-shadow(0 0 11px #d6a76da0)}}
+@keyframes twoShines{0%,8%{opacity:0;background-position:125% 0}20%{opacity:.95}34%{opacity:.7;background-position:-120% 0}49%{opacity:0;background-position:125% 0}60%{opacity:.94}82%{opacity:.86;background-position:-120% 0}95%,100%{opacity:0;background-position:-120% 0}}
+@media(max-width:1024px){.option-grid{grid-template-columns:1fr 1fr}.option-box:last-child{grid-column:span 2}}
+@media(max-width:600px){.option-grid{padding:0 10px;gap:9px;grid-template-columns:1fr}.option-box:last-child{grid-column:span 1}.choice-button{padding:8px 9px;font-size:11px}}
+@media(prefers-reduced-motion:reduce){.site.fx-e2 .autumn-leaf,.site.fx-e4 .autumn-leaf{display:none!important}.site .logo *{animation:none!important}}
+
 </style>
 </head>
 <body>
+
+<section class="option-grid" aria-label="Personalizar visualização">
+  <div class="option-box"><span class="option-heading">MODELO</span><div class="choice-row" id="models"></div></div>
+  <div class="option-box"><span class="option-heading">COR</span><div class="choice-row" id="colors"></div></div>
+  <div class="option-box"><span class="option-heading">EFEITO</span><div class="choice-row" id="effects"></div></div>
+</section>
 <div class="controlbar">
  <div class="navigation"><button class="navbutton" id="prev" aria-label="Tela anterior">←</button><div class="counter" aria-live="polite"><strong id="code">C-01 · V01</strong><small id="number">01 / 24</small></div><button class="navbutton" id="next" aria-label="Próxima tela">→</button></div>
  <div class="modes" role="group" aria-label="Visualização"><button class="modebutton selected" data-device="desktop">Desktop</button><button class="modebutton" data-device="mobile">Celular</button></div>
@@ -146,9 +198,34 @@ button:focus-visible{outline:3px solid #d9af75;outline-offset:3px}
  var mi=Math.max(0,['c1','c2','c3'].indexOf(query.get('modelo')));
  var ci=Math.max(0,colors.findIndex(function(c){return c.id===query.get('cor');}));
  var idx=mi*8+ci;
+ var effectId=query.get('efeito')||'e01';
+ var effects=[{id:'e01',label:'E01 · Brilho'},{id:'e02',label:'E02 · Florescer'},{id:'e03',label:'E03 · Traços'},{id:'e04',label:'E04 · Pétalas'}];
+ var effect=Math.max(0,effects.findIndex(function(x){return x.id===effectId;}));
+ function makeChoices(rootId,entries,choose){
+   var host=document.getElementById(rootId);
+   entries.forEach(function(entry,i){
+    var b=document.createElement('button');
+    b.type='button'; b.className='choice-button';
+    b.textContent=entry.label; b.dataset.pick=String(i);
+    b.setAttribute('aria-pressed','false');
+    b.addEventListener('click',function(){choose(i); apply();});
+    host.appendChild(b);
+   });
+ }
+ function updateChoices(){
+   var m=Math.floor(idx/8),c=idx%8;
+   [['models',m],['colors',c],['effects',effect]].forEach(function(pair){
+    document.querySelectorAll('#'+pair[0]+' .choice-button').forEach(function(btn,i){
+      var yes=i===pair[1];btn.classList.toggle('selected',yes);btn.setAttribute('aria-pressed',String(yes));
+    });
+   });
+ }
  var site=document.getElementById('site'),stage=document.getElementById('stage');
  function apply(){
   var model=Math.floor(idx/8),color=colors[idx%8];
+  site.classList.remove('fx-e1','fx-e2','fx-e3','fx-e4');
+  site.classList.add('fx-'+effects[effect].id);
+  updateChoices();
   site.style.setProperty('--surface',color.s);
   site.style.setProperty('--letter',color.l);
   site.style.setProperty('--flower',color.f);
@@ -161,11 +238,12 @@ button:focus-visible{outline:3px solid #d9af75;outline-offset:3px}
   document.querySelectorAll('.logo').forEach(function(el){
    el.style.setProperty('--flower-mask','url("'+flowers[model]+'")');
   });
-  document.getElementById('code').textContent='C-0'+(model+1)+' · '+color.id.toUpperCase();
+  document.getElementById('code').textContent='C-0'+(model+1)+' · '+color.id.toUpperCase()+' · '+effects[effect].id.toUpperCase();
   document.getElementById('number').textContent=String(idx+1).padStart(2,'0')+' / 24';
   var url=new URL(location.href);
   url.searchParams.set('modelo','c'+(model+1));
   url.searchParams.set('cor',color.id);
+  url.searchParams.set('efeito',effects[effect].id);
   history.replaceState({},'',url);
   site.querySelectorAll('.header .letters,.header .flower,.header .luminous,.header .flower-luminous,.autumn-leaf').forEach(function(el){
    el.style.animation='none';void el.offsetWidth;el.style.animation='';
@@ -184,6 +262,9 @@ button:focus-visible{outline:3px solid #d9af75;outline-offset:3px}
   if(e.key==='ArrowRight'){idx=(idx+1)%24;apply();}
   if(e.key==='ArrowLeft'){idx=(idx+23)%24;apply();}
  });
+ makeChoices('models',[{label:'C-01 · Original'},{label:'C-02 · Maior'},{label:'C-03 · Aberta'}],function(i){idx=i*8+(idx%8);});
+ makeChoices('colors',colors.map(function(x){return {label:x.id.toUpperCase()};}),function(i){idx=Math.floor(idx/8)*8+i;});
+ makeChoices('effects',effects,function(i){effect=i;});
  apply();
 })();
 </script>
