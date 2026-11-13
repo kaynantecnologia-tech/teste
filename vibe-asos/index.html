@@ -69,6 +69,52 @@ button:focus-visible{outline:3px solid #d9af75;outline-offset:3px}
 @media(max-width:790px){.controlbar{justify-content:center}.stage-wrap{padding:0 9px}.navbutton,.modebutton{padding:10px 11px;font-size:12px}.stage-outer{padding:8px}.header{height:110px}.header .logo{width:235px}.hero{grid-template-columns:1fr}.hero-core{min-height:360px}.photo{height:330px;min-height:330px}}
 @media(max-width:440px){.controlbar{padding:12px 7px;gap:10px}.counter{min-width:95px}.counter strong{font-size:13px}.stage-outer.mobile{padding:9px}.stage-wrap{padding:0 7px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+
+/* Ajuste de aprovação: uma única assinatura, localizada somente no topo. */
+.header{height:174px;position:relative;z-index:5;overflow:visible;isolation:isolate}
+.header .logo{width:min(430px,76%);z-index:2}
+.header .letters{animation:reveal 1.6s cubic-bezier(.22,.76,.32,1) both}
+.header .flower{animation:blossom 1.7s cubic-bezier(.17,.7,.32,1) .28s both;filter:drop-shadow(0 0 9px #d6a76d6a)}
+.header .luminous{animation:sweep 5.8s ease-in-out 1.4s infinite}
+.header .flower-luminous{animation:sweep 4.8s ease-in-out 1.7s infinite}
+.navline{position:relative;z-index:2}
+.hero{position:relative;z-index:1}
+.hero-core{padding:58px clamp(26px,6vw,100px);justify-content:flex-start;overflow:visible;background:radial-gradient(ellipse 80% 70% at 50% 55%,#d7ab681c,transparent 80%),var(--surface)}
+.hero-core:before{display:none}
+.hero-core:after{opacity:.32}
+.hero-copy{max-width:570px;position:relative;z-index:1}
+.hero-eyebrow{color:var(--flower);font-size:11px;letter-spacing:.25em;font-weight:700}
+.hero-eyebrow b{font-weight:400;padding-left:9px}
+.hero-copy h1{font:400 clamp(46px,5vw,77px)/1.06 Georgia,'Times New Roman',serif;letter-spacing:-.048em;color:var(--hero-ink,#19494c);margin:22px 0}
+.hero-copy h1 em{font-weight:400;color:var(--hero-emphasis,#ac7358)}
+.hero-copy p{font:400 clamp(13px,1.3vw,17px)/1.9 'Segoe UI',Arial,sans-serif;color:var(--hero-muted,#506660);max-width:390px;margin:0}
+.hero-underline{margin-top:42px;width:160px;height:1px;background:linear-gradient(90deg,var(--flower),transparent)}
+/* Pétalas de outono: partem do topo, oscilam lateralmente e caem. */
+.autumn-leaves{position:absolute;top:33px;left:50%;width:min(520px,96%);height:360px;transform:translateX(-50%);z-index:3;pointer-events:none;overflow:visible}
+.autumn-leaf{position:absolute;top:22%;left:var(--x);width:var(--w);height:var(--h);background:linear-gradient(135deg,#ffdfa0 0%,var(--flower) 48%,#b77843 100%);border-radius:94% 3% 87% 9%;opacity:0;filter:drop-shadow(0 0 4px #d6a76d80);transform-origin:50% 70%;will-change:transform,opacity;animation:autumn-fall var(--dur) cubic-bezier(.25,.15,.65,.9) var(--delay) infinite}
+@keyframes autumn-fall{
+  0%{opacity:0;transform:translate3d(0,-15px,0) rotate(-30deg) scale(.48)}
+  10%{opacity:.95}
+  32%{transform:translate3d(calc(var(--dx) * -.25),95px,0) rotate(100deg) scale(.92)}
+  63%{opacity:.84;transform:translate3d(calc(var(--dx) * .68),210px,0) rotate(220deg) scale(.85)}
+  100%{opacity:0;transform:translate3d(var(--dx),var(--dy),0) rotate(415deg) scale(.7)}
+}
+.stage-outer.mobile .header{height:126px}
+.stage-outer.mobile .header .logo{width:260px;max-width:85%}
+.stage-outer.mobile .autumn-leaves{width:290px;top:18px;height:305px}
+.stage-outer.mobile .autumn-leaf{animation-duration:calc(var(--dur) * .85)}
+.stage-outer.mobile .hero-core{min-height:350px;padding:45px 27px}
+.stage-outer.mobile .hero-copy h1{font-size:50px}
+.stage-outer.mobile .hero-copy p{font-size:13px}
+@media(max-width:790px){
+  .header{height:135px}
+  .header .logo{width:min(300px,83%)}
+  .autumn-leaves{top:20px;width:min(350px,90%)}
+  .hero-core{min-height:370px;padding:42px 28px}
+  .hero-copy h1{font-size:clamp(40px,9vw,62px)}
+}
+@media(prefers-reduced-motion:reduce){.autumn-leaf{display:none!important}}
+
 </style>
 </head>
 <body>
@@ -79,9 +125,9 @@ button:focus-visible{outline:3px solid #d9af75;outline-offset:3px}
 <main class="stage-wrap"><div class="stage-outer" id="stage"><div class="phone-notch"></div>
 <div class="site" id="site">
  <div class="strip"></div>
- <header class="header"><div class="logo"><span class="letters"></span><span class="flower"></span><span class="luminous"></span></div></header>
+ <header class="header" aria-label="Assinatura Vibe a sós"><div class="logo" role="img" aria-label="Vibe a sós, assinatura C com flor de lótus"><span class="letters"></span><span class="flower"></span><span class="luminous"></span><span class="flower-luminous"></span></div><div class="autumn-leaves" aria-hidden="true"><span class="autumn-leaf" style="--x:48%;--dx:-164px;--dy:320px;--delay:-2.4s;--dur:7.8s;--w:10px;--h:17px" aria-hidden="true"></span><span class="autumn-leaf" style="--x:53%;--dx:117px;--dy:296px;--delay:-6.1s;--dur:8.3s;--w:9px;--h:18px" aria-hidden="true"></span><span class="autumn-leaf" style="--x:43%;--dx:-112px;--dy:348px;--delay:-4s;--dur:9.2s;--w:9px;--h:16px" aria-hidden="true"></span><span class="autumn-leaf" style="--x:56%;--dx:169px;--dy:313px;--delay:-1.8s;--dur:8.7s;--w:11px;--h:21px" aria-hidden="true"></span><span class="autumn-leaf" style="--x:50%;--dx:58px;--dy:390px;--delay:-8.3s;--dur:9.7s;--w:8px;--h:16px" aria-hidden="true"></span><span class="autumn-leaf" style="--x:46%;--dx:-75px;--dy:276px;--delay:-0.8s;--dur:7.4s;--w:9px;--h:15px" aria-hidden="true"></span><span class="autumn-leaf" style="--x:54%;--dx:93px;--dy:350px;--delay:-5.5s;--dur:8.9s;--w:8px;--h:14px" aria-hidden="true"></span><span class="autumn-leaf" style="--x:49%;--dx:-148px;--dy:355px;--delay:-3s;--dur:9.3s;--w:12px;--h:20px" aria-hidden="true"></span><span class="autumn-leaf" style="--x:45%;--dx:42px;--dy:297px;--delay:-7.4s;--dur:8.1s;--w:10px;--h:18px" aria-hidden="true"></span><span class="autumn-leaf" style="--x:55%;--dx:-44px;--dy:338px;--delay:-0.1s;--dur:8.5s;--w:9px;--h:17px" aria-hidden="true"></span><span class="autumn-leaf" style="--x:51%;--dx:161px;--dy:371px;--delay:-4.8s;--dur:10.1s;--w:11px;--h:20px" aria-hidden="true"></span><span class="autumn-leaf" style="--x:47%;--dx:-84px;--dy:325px;--delay:-2.9s;--dur:7.9s;--w:8px;--h:15px" aria-hidden="true"></span></div></header>
  <div class="navline"><i></i><b>✦</b><i></i><b>✦</b><i></i></div>
- <section class="hero"><div class="hero-core"><div class="logo"><span class="letters"></span><span class="flower"></span><span class="luminous"></span><span class="flower-luminous"></span><span class="spark a"></span><span class="spark b"></span><span class="spark c"></span><span class="spark d"></span></div></div><div class="photo"><img src="assets/editorial.webp" alt=""></div></section>
+ <section class="hero"><div class="hero-core"><div class="hero-copy"><span class="hero-eyebrow">UM UNIVERSO SÓ SEU <b>✦</b></span><h1>Conexões que<br><em>fazem sentir.</em></h1><p>Explore o autocuidado e suas descobertas com leveza, intimidade e liberdade.</p><div class="hero-underline" aria-hidden="true"></div></div></div><div class="photo"><img src="assets/editorial.webp" alt=""></div></section>
 </div></div></main>
 <script>
 (function(){
@@ -108,6 +154,10 @@ button:focus-visible{outline:3px solid #d9af75;outline-offset:3px}
   site.style.setProperty('--flower',color.f);
   site.style.setProperty('--nav',color.n);
   site.style.setProperty('--shine',color.shine);
+  var dark=color.s.toLowerCase()==='#19494c';
+  site.style.setProperty('--hero-ink',dark?'#faf4e9':'#19494c');
+  site.style.setProperty('--hero-muted',dark?'#eee2d4':'#526863');
+  site.style.setProperty('--hero-emphasis',dark?'#e5be82':color.f);
   document.querySelectorAll('.logo').forEach(function(el){
    el.style.setProperty('--flower-mask','url("'+flowers[model]+'")');
   });
@@ -117,7 +167,7 @@ button:focus-visible{outline:3px solid #d9af75;outline-offset:3px}
   url.searchParams.set('modelo','c'+(model+1));
   url.searchParams.set('cor',color.id);
   history.replaceState({},'',url);
-  site.querySelectorAll('.hero .letters,.hero .flower,.hero .luminous,.hero .flower-luminous,.hero .spark').forEach(function(el){
+  site.querySelectorAll('.header .letters,.header .flower,.header .luminous,.header .flower-luminous,.autumn-leaf').forEach(function(el){
    el.style.animation='none';void el.offsetWidth;el.style.animation='';
   });
  }
