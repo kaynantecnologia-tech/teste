@@ -1,19 +1,141 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#19494C"><meta name="description" content="Estúdio de escolha da identidade Vibe a sós. Compare três versões da assinatura C, cores e animações."><title>Vibe a sós — Estúdio Teste</title><link rel="stylesheet" href="style.css"></head><body>
-<div class="studio" id="studio">
- <header class="studio-top"><div class="studio-identity"><span class="studio-mark">✳</span><div><small>ESTÚDIO DE IDENTIDADE · EDIÇÃO TESTE</small><h1>Vibe a sós <em>/</em> Escolha sua assinatura</h1></div></div><div class="studio-status"><span class="live-dot"></span><span>Prévia para aprovação visual</span><button class="icon-btn" id="goPresentation" title="Apresentação sem controles" aria-label="Abrir apresentação">↗</button></div></header>
- <section class="studio-intro"><div><span class="eyebrow">A ESCOLHA É DELA</span><h2>Um detalhe muda <i>tudo.</i></h2><p>Mesma assinatura vencedora, três formas de valorizar a flor. Compare o desenho, o brilho e as cores. Cada escolha tem um código para enviar.</p></div><div class="current-identification"><span>VOCÊ ESTÁ VENDO</span><strong id="currentCode">C-01 · V01</strong><p id="currentName">Flor original · Verde e cobre</p></div></section>
- <div class="choose-model" role="group" aria-label="Variantes de flor"><button class="model-card is-selected" data-model="c1"><span>MODELO <b>C-01</b></span><strong>Original</strong><small>Flor C exatamente como aprovada</small><div class="model-icon">✦</div></button><button class="model-card" data-model="c2"><span>MODELO <b>C-02</b></span><strong>Flor ampliada</strong><small>Mesmas pétalas, maior presença</small><div class="model-icon">✿</div></button><button class="model-card" data-model="c3"><span>MODELO <b>C-03</b></span><strong>Mais pétalas</strong><small>Visual mais aberto, assinatura C</small><div class="model-icon">❀</div></button></div>
- <div class="studio-tools"><div class="palette-title"><span>COMBINAÇÕES DE COR</span><small>Verde-petróleo, cobre, dourado, grafite e marfim</small></div><div class="swatches" id="swatches"></div><div class="studio-controls"><div class="view-switch" role="group" aria-label="Visualização"><button data-view="desktop" class="is-active">▣ Desktop</button><button data-view="mobile">▯ Mobile</button></div><button class="tool" id="replay">↻ Rever efeito</button><button class="tool" id="autoplay">▶ Automático</button><button class="tool" id="favorite">♡ Salvar favorita</button><button class="tool solid" id="share">↗ Compartilhar escolha</button></div></div>
- <div class="preview-rail"><div class="preview-heading"><span>VISUALIZAÇÃO DA LOJA</span><div class="preview-meta"><span id="viewLabel">DESKTOP · VISÃO REAL</span><span class="preview-separator">·</span><span id="codeSub">C-01 / V01</span></div></div><div class="preview-viewport desktop" id="previewViewport"><div class="device-top" id="deviceTop"><span></span><span></span><span></span></div><iframe id="previewIframe" src="?preview=1&modelo=c1&cor=v01" title="Prévia real da loja Vibe a sós" loading="eager"></iframe></div></div>
- <footer class="studio-foot"><div><strong>Favoritas:</strong> <span id="favoritesText">nenhuma ainda</span></div><button class="tool" id="copyFavs">Copiar lista</button><p>Protótipo visual; busca, sacola e pagamentos não estão conectados à Nuvemshop.</p></footer>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#19494c">
+<title>Vibe a sós · Teste</title>
+<style>
+:root{--green:#19494c;--cream:#f8f5f0;--copper:#ac7358;--line:#dce4de;font-family:Arial,Helvetica,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#edf1ee;color:#1d3938}
+button{font:inherit;cursor:pointer}
+button:focus-visible{outline:3px solid #d9af75;outline-offset:3px}
+.controlbar{position:relative;z-index:10;max-width:1440px;margin:0 auto;min-height:82px;padding:13px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.navigation,.modes{display:flex;align-items:center;gap:10px}
+.navbutton,.modebutton{border:1px solid #d1dcd6;color:#254641;background:white;border-radius:12px;padding:12px 16px;font-size:13px;font-weight:700}
+.navbutton:hover,.modebutton:hover{background:#f3f8f5}
+.modebutton.selected{background:#19494c;color:white;border-color:#19494c}
+.counter{text-align:center;min-width:115px;line-height:1.35}
+.counter strong{display:block;font-size:16px;letter-spacing:.09em}
+.counter small{font-size:11px;color:#68817a;font-weight:700}
+.stage-wrap{margin:0 auto 30px;max-width:1440px;padding:0 22px}
+.stage-outer{border:1px solid #d5dfd9;background:#e4ece8;border-radius:18px;padding:13px;box-shadow:0 20px 50px #1c3c3510;transition:width .4s ease,background .4s ease;overflow:hidden}
+.stage-outer.mobile{width:min(420px,100%);margin:0 auto;border-radius:35px;padding:12px;background:#1b3132;box-shadow:0 22px 50px #19312d35}
+.phone-notch{display:none}
+.stage-outer.mobile .phone-notch{width:78px;height:6px;border-radius:20px;background:#596966;display:block;margin:2px auto 12px}
+.site{--surface:#fff;--letter:#19494c;--flower:#ac7358;--shine:#fff0b8;--paper:#f9f6f0;--nav:#19494c;--muted:#d3a77a;position:relative;min-height:630px;overflow:hidden;border-radius:8px;background:var(--paper)}
+.stage-outer.mobile .site{border-radius:19px;min-height:710px}
+.strip{height:26px;background:#f2f0eb}
+.header{height:138px;display:flex;align-items:center;justify-content:center;background:var(--surface);border-bottom:1px solid rgba(0,0,0,.055)}
+.header .logo{width:300px}
+.navline{height:44px;background:var(--nav);display:flex;justify-content:center;align-items:center;gap:20px}
+.navline i{display:block;height:1px;width:56px;background:#d9b98b77}
+.navline b{display:block;color:#d9b98b;font-size:10px;font-weight:400}
+.hero{min-height:510px;display:grid;grid-template-columns:57% 43%;background:var(--surface)}
+.hero-core{position:relative;display:flex;justify-content:center;align-items:center;padding:45px 28px;background:radial-gradient(ellipse 55% 37% at 48% 47%,#d7ab6840,transparent 77%),var(--surface);overflow:hidden}
+.hero-core:before{content:"";pointer-events:none;position:absolute;inset:14% 18%;border-radius:50%;border:1px solid #d8b07840;filter:blur(1px)}
+.hero-core:after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 29%,#fff9dc1c 47%,transparent 60%);pointer-events:none}
+.hero .logo{width:min(100%,700px)}
+.photo{height:100%;min-height:510px;position:relative;background:#d7c5b6;overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:block}
+.photo:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#173c3c13,transparent 45%)}
+.logo{position:relative;display:block;aspect-ratio:900/386;isolation:isolate;--letter-mask:url("assets/letras-c.png");--flower-mask:url("assets/flor-c-original.png")}
+.letters,.flower,.luminous,.flower-luminous{position:absolute;inset:0;mask-position:center;-webkit-mask-position:center;mask-size:100% 100%;-webkit-mask-size:100% 100%;mask-repeat:no-repeat;-webkit-mask-repeat:no-repeat}
+.letters{background:var(--letter);mask-image:var(--letter-mask);-webkit-mask-image:var(--letter-mask)}
+.flower{background:var(--flower);mask-image:var(--flower-mask);-webkit-mask-image:var(--flower-mask);filter:drop-shadow(0 0 5px #d6a76d50)}
+.luminous{mask-image:var(--letter-mask);-webkit-mask-image:var(--letter-mask);background:linear-gradient(102deg,transparent 24%,var(--shine) 47%,#fffdfa 50%,transparent 70%);background-size:300% 100%;animation:sweep 5.8s ease-in-out 2s infinite;mix-blend-mode:screen;opacity:.85}
+.flower-luminous{mask-image:var(--flower-mask);-webkit-mask-image:var(--flower-mask);background:linear-gradient(100deg,transparent 20%,#fff1c3 49%,#fffdfa 52%,transparent 75%);background-size:290% 100%;animation:sweep 5.5s ease-in-out 2.2s infinite;mix-blend-mode:screen}
+.hero .letters{animation:reveal 1.4s cubic-bezier(.23,.76,.33,1) both}
+.hero .flower{animation:blossom 1.65s cubic-bezier(.17,.7,.32,1) .15s both}
+.spark{position:absolute;pointer-events:none;width:8px;height:17px;background:linear-gradient(#ffe7b3,var(--flower));border-radius:85% 5% 85% 5%;filter:drop-shadow(0 0 8px #d9af75b0);opacity:0;animation:float 6.2s ease-in-out infinite}
+.spark.a{left:44%;top:34%;--mx:-80px;--my:-65px;animation-delay:1s}
+.spark.b{left:56%;top:34%;--mx:82px;--my:-95px;animation-delay:2.7s}
+.spark.c{left:49%;top:26%;--mx:20px;--my:-110px;animation-delay:4.1s}
+.spark.d{left:58%;top:45%;--mx:95px;--my:-20px;animation-delay:5.2s}
+@keyframes sweep{0%,20%{background-position:125% 0;opacity:0}30%{opacity:.95}60%{background-position:-125% 0;opacity:.84}70%,100%{background-position:-125% 0;opacity:0}}
+@keyframes reveal{from{clip-path:inset(0 100% 0 0);opacity:.24}to{clip-path:inset(0 0 0 0);opacity:1}}
+@keyframes blossom{0%{opacity:0;clip-path:circle(1% at 49% 53%);transform:scale(.93)}54%{opacity:.85;clip-path:circle(24% at 49% 43%)}100%{opacity:1;clip-path:circle(100% at 49% 43%);transform:scale(1)}}
+@keyframes float{0%,7%{opacity:0;transform:translate(0,20px) rotate(-25deg) scale(.5)}24%{opacity:.78}68%{opacity:.7}100%{opacity:0;transform:translate(var(--mx),var(--my)) rotate(180deg) scale(.6)}}
+.stage-outer.mobile .header{height:107px}
+.stage-outer.mobile .header .logo{width:215px}
+.stage-outer.mobile .navline{height:35px}
+.stage-outer.mobile .navline i{width:27px}
+.stage-outer.mobile .hero{display:flex;flex-direction:column;min-height:0}
+.stage-outer.mobile .hero-core{min-height:300px;padding:22px 15px}
+.stage-outer.mobile .hero .logo{width:100%}
+.stage-outer.mobile .photo{height:310px;min-height:310px}
+.stage-outer.mobile .strip{height:18px}
+@media(max-width:790px){.controlbar{justify-content:center}.stage-wrap{padding:0 9px}.navbutton,.modebutton{padding:10px 11px;font-size:12px}.stage-outer{padding:8px}.header{height:110px}.header .logo{width:235px}.hero{grid-template-columns:1fr}.hero-core{min-height:360px}.photo{height:330px;min-height:330px}}
+@media(max-width:440px){.controlbar{padding:12px 7px;gap:10px}.counter{min-width:95px}.counter strong{font-size:13px}.stage-outer.mobile{padding:9px}.stage-wrap{padding:0 7px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="controlbar">
+ <div class="navigation"><button class="navbutton" id="prev" aria-label="Tela anterior">←</button><div class="counter" aria-live="polite"><strong id="code">C-01 · V01</strong><small id="number">01 / 24</small></div><button class="navbutton" id="next" aria-label="Próxima tela">→</button></div>
+ <div class="modes" role="group" aria-label="Visualização"><button class="modebutton selected" data-device="desktop">Desktop</button><button class="modebutton" data-device="mobile">Celular</button></div>
 </div>
-<div id="shop-preview" hidden>
- <div class="shop" id="shop"><div class="store-ribbon">INTIMIDADE · AUTOCUIDADO · LIBERDADE DE SER</div>
-  <header class="shop-header"><div class="header-inner"><span class="header-left"><span class="hamburger">☰</span><span class="desktop-link">DESCUBRA</span><span class="desktop-link">NOSSA ESSÊNCIA</span></span><div class="brand-mini"><div class="logo-unit logo-mini"><span class="logo-letters"></span><span class="logo-flower"></span><span class="logo-shimmer"></span></div></div><span class="header-right"><span>⌕</span><span>♧</span></span></div></header>
-  <nav class="shop-nav"><span>UNIVERSOS</span><small>✦</small><span>COLEÇÕES</span><small>✦</small><span>AUTOCUIDADO</span><small>✦</small><span>ESSÊNCIA</span></nav>
-  <section class="showcase"><div class="showcase-content"><div class="showcase-overline"><span class="starlight">✧</span> PRAZER EM FLORESCER</div><div class="logo-surround"><div class="halo"></div><div class="logo-unit logo-large"><span class="logo-letters"></span><span class="logo-flower"></span><span class="logo-shimmer"></span><span class="flower-halo"></span><span class="petal p1"></span><span class="petal p2"></span><span class="petal p3"></span><span class="petal p4"></span><span class="petal p5"></span></div></div><h2>Sinta-se livre para <i>florescer.</i></h2><p>Uma experiência de descoberta, intimidade e conexão com a sua essência.</p><div class="showcase-buttons"><a class="btn-main" href="#colecoes">Explore seu universo <span>↗</span></a><a class="btn-minimal" href="#essencia">Conheça nossa essência</a></div></div><div class="hero-photo" aria-label="Imagem editorial da identidade"><img src="assets/editorial.webp" alt="Cena editorial sofisticada com flores e produtos de autocuidado"><div class="photo-shade"></div><span class="photo-caption">A beleza de ser você.</span></div></section>
-  <section class="shop-teaser" id="colecoes"><div class="teaser-label"><span>01 / DESCOBERTAS</span><h3>Seu universo, <i>do seu jeito.</i></h3><p>Um espaço de autocuidado com discrição e personalidade.</p></div><div class="teaser-cards"><div><span>✳</span><strong>Bem-estar</strong><small>Um ritual só seu</small></div><div><span>✿</span><strong>Conexões</strong><small>Descobertas a dois</small></div><div><span>◈</span><strong>Essenciais</strong><small>Escolhas com carinho</small></div></div></section>
-  <footer class="shop-footer">Vibe a sós <span>✧</span> identidade em construção</footer>
- </div>
-</div>
-<script src="app.js" defer></script></body></html>
+<main class="stage-wrap"><div class="stage-outer" id="stage"><div class="phone-notch"></div>
+<div class="site" id="site">
+ <div class="strip"></div>
+ <header class="header"><div class="logo"><span class="letters"></span><span class="flower"></span><span class="luminous"></span></div></header>
+ <div class="navline"><i></i><b>✦</b><i></i><b>✦</b><i></i></div>
+ <section class="hero"><div class="hero-core"><div class="logo"><span class="letters"></span><span class="flower"></span><span class="luminous"></span><span class="flower-luminous"></span><span class="spark a"></span><span class="spark b"></span><span class="spark c"></span><span class="spark d"></span></div></div><div class="photo"><img src="assets/editorial.webp" alt=""></div></section>
+</div></div></main>
+<script>
+(function(){
+ var colors=[
+ {id:'v01',s:'#ffffff',l:'#19494c',f:'#ac7358',n:'#19494c',shine:'#ffe4b4'},
+ {id:'v02',s:'#ffffff',l:'#19494c',f:'#d6aa68',n:'#19494c',shine:'#fff1c4'},
+ {id:'v03',s:'#19494c',l:'#f6e9d6',f:'#d9ad65',n:'#102f32',shine:'#fffad7'},
+ {id:'v04',s:'#19494c',l:'#ffffff',f:'#ffffff',n:'#113739',shine:'#ffffff'},
+ {id:'v05',s:'#ffffff',l:'#181918',f:'#181918',n:'#19494c',shine:'#fff4dd'},
+ {id:'v06',s:'#ffffff',l:'#181918',f:'#ac7358',n:'#19494c',shine:'#fff2bc'},
+ {id:'v07',s:'#fffaf5',l:'#a77156',f:'#a77156',n:'#19494c',shine:'#ffe4b2'},
+ {id:'v08',s:'#f7f5ef',l:'#19494c',f:'#19494c',n:'#19494c',shine:'#e8f5ec'}
+ ];
+ var flowers=['assets/flor-c-original.png','assets/flor-c-ampliada.png','assets/flor-c-petalas.png'];
+ var query=new URLSearchParams(location.search);
+ var mi=Math.max(0,['c1','c2','c3'].indexOf(query.get('modelo')));
+ var ci=Math.max(0,colors.findIndex(function(c){return c.id===query.get('cor');}));
+ var idx=mi*8+ci;
+ var site=document.getElementById('site'),stage=document.getElementById('stage');
+ function apply(){
+  var model=Math.floor(idx/8),color=colors[idx%8];
+  site.style.setProperty('--surface',color.s);
+  site.style.setProperty('--letter',color.l);
+  site.style.setProperty('--flower',color.f);
+  site.style.setProperty('--nav',color.n);
+  site.style.setProperty('--shine',color.shine);
+  document.querySelectorAll('.logo').forEach(function(el){
+   el.style.setProperty('--flower-mask','url("'+flowers[model]+'")');
+  });
+  document.getElementById('code').textContent='C-0'+(model+1)+' · '+color.id.toUpperCase();
+  document.getElementById('number').textContent=String(idx+1).padStart(2,'0')+' / 24';
+  var url=new URL(location.href);
+  url.searchParams.set('modelo','c'+(model+1));
+  url.searchParams.set('cor',color.id);
+  history.replaceState({},'',url);
+  site.querySelectorAll('.hero .letters,.hero .flower,.hero .luminous,.hero .flower-luminous,.hero .spark').forEach(function(el){
+   el.style.animation='none';void el.offsetWidth;el.style.animation='';
+  });
+ }
+ document.getElementById('prev').addEventListener('click',function(){idx=(idx+23)%24;apply();});
+ document.getElementById('next').addEventListener('click',function(){idx=(idx+1)%24;apply();});
+ document.querySelectorAll('[data-device]').forEach(function(button){
+  button.addEventListener('click',function(){
+   var mobile=button.dataset.device==='mobile';
+   stage.classList.toggle('mobile',mobile);
+   document.querySelectorAll('[data-device]').forEach(function(b){b.classList.toggle('selected',b===button);});
+  });
+ });
+ document.addEventListener('keydown',function(e){
+  if(e.key==='ArrowRight'){idx=(idx+1)%24;apply();}
+  if(e.key==='ArrowLeft'){idx=(idx+23)%24;apply();}
+ });
+ apply();
+})();
+</script>
+</body>
+</html>
