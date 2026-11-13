@@ -13,7 +13,7 @@
  ];
  const $=s=>document.querySelector(s);const params=new URLSearchParams(location.search);let model=MODELS.find(x=>x.id===params.get('modelo'))||MODELS[0];let color=COLORS.find(x=>x.id===params.get('cor'))||COLORS[0];
  function applyToShop(){const el=$('#shop');if(!el)return;
-  const vars={surface:color.surface,letter:color.letter,flower:color.flower,shine:color.shine,paper:color.paper,main:color.main,maintext:color.mainText,tone:color.tone,'header-text':color.surface==='#19494c'?'#fff':'#19494c',button:color.main,'button-text':color.mainText};
+  const vars={surface:color.surface,letter:color.letter,flower:color.flower,shine:color.shine,paper:color.paper,main:color.main,maintext:color.mainText,tone:color.tone,'header-text':color.surface==='#19494c'?'#fff':'#19494c',copy:color.surface==='#19494c'?'#f8f2e8':'#243d37','copy-muted':color.surface==='#19494c'?'#e5e9e2':'#66736b','copy-link':color.surface==='#19494c'?'#f2e2c9':'#294743',button:color.main,'button-text':color.mainText};
   for(const [key,value] of Object.entries(vars))el.style.setProperty('--'+key,value);
   el.querySelectorAll('.logo-unit').forEach(x=>x.style.setProperty('--flower-url',`url("${model.flor}")`));
   document.querySelectorAll('.logo-unit').forEach(x=>{x.style.setProperty('--flower-url',`url("${model.flor}")`);x.querySelectorAll('.logo-letters,.logo-flower,.logo-shimmer,.petal').forEach(y=>{y.style.animation='none';void y.offsetWidth;y.style.animation='';});});
