@@ -224,7 +224,7 @@ button:focus-visible{outline:3px solid #d9af75;outline-offset:3px}
  function apply(){
   var model=Math.floor(idx/8),color=colors[idx%8];
   site.classList.remove('fx-e1','fx-e2','fx-e3','fx-e4');
-  site.classList.add('fx-'+effects[effect].id);
+  site.classList.add('fx-e'+(effect+1));
   updateChoices();
   site.style.setProperty('--surface',color.s);
   site.style.setProperty('--letter',color.l);
