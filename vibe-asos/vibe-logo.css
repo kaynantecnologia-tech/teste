@@ -1,0 +1,100 @@
+/* Vibe a sós — assinatura C animada.
+   Mesmo arquivo usado na prévia e no tema da Nuvemshop.
+   Cores: --vs-letra, --vs-flor, --vs-brilho. Efeito: data-fx="e1..e5" no .vs-logo.
+   A animação roda quando o .vs-logo recebe a classe .vs-play. */
+.vs-logo{
+  --vs-letra:#19494c;--vs-flor:#ac7358;--vs-brilho:#f3d08a;
+  --m-letras:url("assets/letras-c.png");
+  --m-corpo:url("assets/corpo-c1.png");
+  --m-semente:url("assets/seed-c1.png");
+  --m-flor:url("assets/flor-c-original.png");
+  position:relative;display:block;aspect-ratio:900/386;isolation:isolate;overflow:visible
+}
+.vs-logo .vs-l{position:absolute;inset:0;display:block;pointer-events:none;
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:100% 100%;mask-size:100% 100%}
+.vs-letras{background:var(--vs-letra);-webkit-mask-image:var(--m-letras);mask-image:var(--m-letras)}
+.vs-corpo{background:var(--vs-flor);-webkit-mask-image:var(--m-corpo);mask-image:var(--m-corpo);transform-origin:52.1% 57.3%}
+.vs-semente{background:var(--vs-flor);-webkit-mask-image:var(--m-semente);mask-image:var(--m-semente);transform-origin:50.7% 44.6%}
+.vs-luz-l{-webkit-mask-image:var(--m-letras);mask-image:var(--m-letras);opacity:0;
+  background:linear-gradient(100deg,transparent 40%,var(--vs-brilho) 47%,#fff8e6 50%,var(--vs-brilho) 53%,transparent 60%);background-size:320% 100%;background-position:120% 0}
+.vs-luz-f{-webkit-mask-image:var(--m-flor);mask-image:var(--m-flor);opacity:0;
+  background:linear-gradient(100deg,transparent 36%,var(--vs-brilho) 46%,#fff8e6 50%,var(--vs-brilho) 54%,transparent 64%);background-size:320% 100%;background-position:120% 0}
+.vs-halo{opacity:0;background:radial-gradient(ellipse 22% 30% at 51% 30%,color-mix(in srgb,var(--vs-flor) 45%,transparent),transparent 70%);filter:blur(6px)}
+/* pétalas e brilhos (decorativos) */
+.vs-p{position:absolute;display:block;pointer-events:none;opacity:0;left:51%;top:30%;width:2.4%;height:11%;
+  border:1.6px solid var(--vs-flor);border-radius:100% 0 100% 0;filter:drop-shadow(0 0 3px color-mix(in srgb,var(--vs-flor) 50%,transparent))}
+.vs-p.cheia{border:0;background:linear-gradient(135deg,var(--vs-brilho),var(--vs-flor) 60%)}
+.vs-s{position:absolute;display:block;pointer-events:none;opacity:0;font:400 26px/1 Georgia,serif;color:var(--vs-brilho);
+  text-shadow:0 0 8px var(--vs-brilho),0 0 2px #fff}
+.vs-s::before{content:"✦"}
+
+/* ===== E01 · Clássico (o efeito aprovado antes): letra surge, flor brota, coração nasce, pétalas voam ===== */
+.vs-play[data-fx="e1"] .vs-letras{animation:vsSurge 1.8s cubic-bezier(.2,.74,.28,1) both}
+.vs-play[data-fx="e1"] .vs-corpo{animation:vsBrota 1.6s cubic-bezier(.2,.7,.25,1) .25s both}
+.vs-play[data-fx="e1"] .vs-semente{animation:vsNasce .7s cubic-bezier(.3,1.6,.5,1) 1.55s both}
+.vs-play[data-fx="e1"] .vs-luz-l{animation:vsVarre 2.4s ease-in-out 1.6s both}
+.vs-play[data-fx="e1"] .vs-luz-f{animation:vsVarre 2s ease-in-out 2.1s both}
+.vs-play[data-fx="e1"] .vs-p1{animation:vsVoa 3.1s ease-out 1.3s both;--dx:240%;--dy:-170%;--r:165deg}
+.vs-play[data-fx="e1"] .vs-p2{animation:vsVoa 3.4s ease-out 1.5s both;--dx:-230%;--dy:-150%;--r:-170deg}
+.vs-play[data-fx="e1"] .vs-p3{animation:vsVoa 2.8s ease-out 1.7s both;--dx:140%;--dy:-220%;--r:-80deg}
+.vs-play[data-fx="e1"] .vs-p4{animation:vsVoa 3s ease-out 1.95s both;--dx:-80%;--dy:-260%;--r:190deg}
+
+/* ===== E02 · Florescer: o coração aparece primeiro e a flor abre a partir dele ===== */
+.vs-play[data-fx="e2"] .vs-letras{animation:vsFade 1.2s ease-out .2s both}
+.vs-play[data-fx="e2"] .vs-semente{animation:vsNasce .8s cubic-bezier(.3,1.7,.5,1) .1s both}
+.vs-play[data-fx="e2"] .vs-halo{animation:vsHalo 3.4s ease-in-out .5s both}
+.vs-play[data-fx="e2"] .vs-corpo{animation:vsAbre 2.4s cubic-bezier(.17,.7,.25,1) .6s both}
+.vs-play[data-fx="e2"] .vs-luz-f{animation:vsVarre 1.8s ease-in-out 2.9s both}
+
+/* ===== E03 · Traço vivo: a assinatura é escrita e a luz corre pelas letras e pelo traço ===== */
+.vs-play[data-fx="e3"] .vs-letras{animation:vsEscreve 2.6s cubic-bezier(.45,.1,.4,1) both}
+.vs-play[data-fx="e3"] .vs-luz-l{animation:vsCaneta 2.6s cubic-bezier(.45,.1,.4,1) both,vsCorre 3.2s ease-in-out 3s infinite}
+.vs-play[data-fx="e3"] .vs-corpo,.vs-play[data-fx="e3"] .vs-semente{animation:vsDesce .9s ease-out 2.2s both}
+
+/* ===== E04 · Pétalas: chuva de pétalas e a flor clareia ===== */
+.vs-play[data-fx="e4"] .vs-letras,.vs-play[data-fx="e4"] .vs-semente{animation:vsFade .8s ease-out both}
+.vs-play[data-fx="e4"] .vs-corpo{animation:vsFade .8s ease-out both,vsBalanca 4.8s ease-in-out 1s infinite}
+.vs-play[data-fx="e4"] .vs-luz-f{animation:vsClareia 4.8s ease-in-out 1.8s infinite}
+.vs-play[data-fx="e4"] .vs-p{animation:vsCai var(--d,6s) linear var(--t,0s) infinite}
+.vs-play[data-fx="e4"] .vs-p1{left:38%;--d:6.4s;--t:.2s;--dx:-60%}
+.vs-play[data-fx="e4"] .vs-p2{left:62%;--d:7.1s;--t:1.4s;--dx:90%}
+.vs-play[data-fx="e4"] .vs-p3{left:47%;--d:5.8s;--t:2.6s;--dx:40%}
+.vs-play[data-fx="e4"] .vs-p4{left:56%;--d:6.8s;--t:3.5s;--dx:-90%}
+.vs-play[data-fx="e4"] .vs-p5{left:30%;--d:7.4s;--t:.9s;--dx:70%}
+.vs-play[data-fx="e4"] .vs-p6{left:70%;--d:6.1s;--t:2.1s;--dx:-50%}
+.vs-play[data-fx="e4"] .vs-p7{left:22%;--d:6.6s;--t:4.2s;--dx:60%}
+.vs-play[data-fx="e4"] .vs-p8{left:80%;--d:7.2s;--t:.5s;--dx:-70%}
+.vs-play[data-fx="e4"] .vs-p9{left:43%;--d:5.6s;--t:4.9s;--dx:-40%}
+.vs-play[data-fx="e4"] .vs-p10{left:60%;--d:6.3s;--t:5.6s;--dx:50%}
+
+/* ===== E05 · Dourado: reflexo metálico contínuo + brilhos piscando ===== */
+.vs-play[data-fx="e5"] .vs-letras{background:linear-gradient(100deg,var(--vs-letra) 0 32%,var(--vs-brilho) 43%,#fffaf0 50%,var(--vs-brilho) 57%,var(--vs-letra) 68% 100%);background-size:330% 100%;animation:vsFade .7s ease-out both,vsMetal 4.2s ease-in-out .4s infinite}
+.vs-play[data-fx="e5"] .vs-corpo,.vs-play[data-fx="e5"] .vs-semente{background:linear-gradient(100deg,var(--vs-flor) 0 38%,var(--vs-brilho) 46%,#fffaf0 50%,var(--vs-brilho) 54%,var(--vs-flor) 62% 100%);background-size:330% 100%;animation:vsFade .7s ease-out both,vsMetal 4.2s ease-in-out 1.1s infinite}
+.vs-play[data-fx="e5"] .vs-s{animation:vsPisca 2.6s ease-in-out var(--t,0s) infinite}
+.vs-s1{left:36%;top:6%;--t:.3s}.vs-s2{left:63%;top:2%;--t:1.1s}.vs-s3{left:86%;top:55%;--t:1.8s}.vs-s4{left:9%;top:44%;--t:.8s}.vs-s5{left:52%;top:-12%;--t:2.2s;font-size:18px}
+
+@keyframes vsSurge{0%{opacity:0;filter:blur(4px);transform:translateY(7px)}45%{opacity:.7;filter:blur(1.6px)}100%{opacity:1;filter:blur(0);transform:none}}
+@keyframes vsBrota{0%{opacity:.2;clip-path:inset(62% 0 0 0);transform:scale(.82,.7)}60%{opacity:1}100%{opacity:1;clip-path:inset(0 0 0 0);transform:none}}
+@keyframes vsNasce{0%{opacity:0;transform:scale(.2)}100%{opacity:1;transform:none}}
+@keyframes vsVarre{0%{opacity:0;background-position:120% 0}15%{opacity:.95}85%{opacity:.9}100%{opacity:0;background-position:-20% 0}}
+@keyframes vsVoa{0%{opacity:0;transform:translate(0,0) rotate(20deg) scale(.3)}14%{opacity:.85}65%{opacity:.6}100%{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(var(--r)) scale(.8)}}
+@keyframes vsFade{from{opacity:0}to{opacity:1}}
+@keyframes vsHalo{0%{opacity:0;transform:scale(.4)}45%{opacity:1;transform:scale(1.15)}100%{opacity:0;transform:scale(1.3)}}
+@keyframes vsAbre{0%{opacity:0;clip-path:circle(0% at 50.7% 44.6%);transform:scale(.55) rotate(-8deg)}40%{opacity:1}100%{opacity:1;clip-path:circle(90% at 50.7% 44.6%);transform:none}}
+@keyframes vsEscreve{0%{clip-path:inset(0 100% 0 0)}100%{clip-path:inset(0 0 0 0)}}
+@keyframes vsCaneta{0%{opacity:1;background-position:108% 0}95%{opacity:1;background-position:2% 0}100%{opacity:0;background-position:0 0}}
+@keyframes vsCorre{0%{opacity:0;background-position:120% 0}12%{opacity:1}80%{opacity:1}100%{opacity:0;background-position:-20% 0}}
+@keyframes vsDesce{0%{opacity:0;transform:translateY(-14%)}100%{opacity:1;transform:none}}
+@keyframes vsBalanca{0%,100%{transform:rotate(0)}30%{transform:rotate(-2.2deg)}70%{transform:rotate(2.2deg)}}
+@keyframes vsClareia{0%,100%{opacity:0;background-position:120% 0}20%{opacity:.95}55%{opacity:.9;background-position:-20% 0}70%{opacity:0;background-position:-20% 0}}
+@keyframes vsCai{0%{opacity:0;transform:translate(0,-60%) rotate(-20deg) scale(.7)}10%{opacity:.9}85%{opacity:.75}100%{opacity:0;transform:translate(var(--dx),2200%) rotate(340deg) scale(1)}}
+@keyframes vsMetal{0%{background-position:120% 0}60%,100%{background-position:-20% 0}}
+@keyframes vsPisca{0%,100%{opacity:0;transform:scale(.3) rotate(0)}45%{opacity:1;transform:scale(1.1) rotate(25deg)}70%{opacity:.2;transform:scale(.6) rotate(45deg)}}
+.vs-play[data-fx="e4"] .vs-p{width:3.2%;height:14%;top:20%;border:0;background:linear-gradient(135deg,var(--vs-brilho),var(--vs-flor) 60%);border-radius:94% 4% 88% 8%}
+/* insígnia flutuante (flor completa) */
+.vs-insignia{position:fixed;right:18px;bottom:18px;z-index:50;width:58px;height:58px;border-radius:50%;border:1px solid color-mix(in srgb,var(--vs-flor) 45%,transparent);
+  background:var(--vs-fundo-insignia,#19494c);box-shadow:0 10px 28px rgba(0,0,0,.18);cursor:pointer;display:grid;place-items:center;padding:0;
+  transition:transform .3s,opacity .3s}
+.vs-insignia::before{content:"";width:64%;height:64%;background:var(--vs-flor);-webkit-mask:var(--m-icone,url("assets/lotus-icone.png")) center/contain no-repeat;mask:var(--m-icone,url("assets/lotus-icone.png")) center/contain no-repeat;animation:vsRespira 3.6s ease-in-out infinite}
+.vs-insignia:hover{transform:scale(1.07)}
+@keyframes vsRespira{0%,100%{transform:scale(1);filter:none}50%{transform:scale(1.08);filter:drop-shadow(0 0 5px var(--vs-brilho))}}

@@ -1,12 +1,18 @@
 # Vibe a sós — Teste de identidade
 
-Prévia independente para seleção da assinatura **C**, sem alterar a loja Nuvemshop.
+Site de teste para a cliente escolher a assinatura **C**.
 
-- **C-01 Original:** assinatura C fiel à referência enviada.
-- **C-02 Flor ampliada:** a mesma flor, maior.
-- **C-03 Flor aberta:** a caligrafia C com pétalas adicionais inspiradas nas aprovadas do painel comparativo.
-- **V01–V08:** oito combinações com verde-petróleo `#19494C`, cobre, dourado, marfim, grafite e branco.
+- **Modelo:** C-01 Original · C-02 Maior · C-03 Aberta
+- **Cor:** 16 paletas prontas (V01–V16) + cor livre (fundo, letra, flor, brilho), aleatória e padrão
+- **Efeito:** E01 Clássico · E02 Florescer · E03 Traço vivo · E04 Pétalas · E05 Dourado
+- **Tela:** computador ou celular
+- **Comparar 3:** os três modelos lado a lado
+- **Enviar:** manda o código + link da escolha (WhatsApp/compartilhar)
 
-Tudo é HTML, CSS e JS nativo, sem backend. Favoritas são salvas **somente no dispositivo local**; para informar as escolhas a outra pessoa, clicar em **Compartilhar escolha** ou **Copiar lista**. Links com `?modelo=c2&cor=v03` preservam a opção.
+Arquivos
+- `index.html` — site de teste
+- `vibe-logo.css` — logo e efeitos (mesmo CSS usado na Nuvemshop)
+- `assets/` — logo em alta (2700 px), separada em letras, flor e coração/pontinho
+- `nuvemshop/` — pacote para instalar no tema (ver `LEIA-ME.txt`)
 
-**Nuvemshop:** estes arquivos são para teste independente. O pacote `nuvemshop/` separado é o componente a ser adaptado conforme o tema, e exige acesso ao código-fonte do tema para usar HTML/CSS/JS personalizados. Não publica alterações no checkout, carrinho ou produtos da loja.
+HTML, CSS e JS puros, sem backend.
